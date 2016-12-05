@@ -1,0 +1,33 @@
+{
+  "name": "single-spa-svelte",
+  "version": "0.0.1",
+  "description": "a single-spa plugin for svelte applications",
+  "main": "lib/single-spa-svelte.js",
+  "scripts": {
+		"build": "babel src --out-dir lib"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CanopyTax/single-spa-svelte.git"
+  },
+  "keywords": [
+    "single-spa",
+    "svelte",
+    "microservices"
+  ],
+  "author": "Bret Little",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/CanopyTax/single-spa-svelte/issues"
+  },
+  "homepage": "https://github.com/CanopyTax/single-spa-svelte#readme",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-plugin-transform-object-rest-spread": "^6.19.0",
+    "babel-preset-es2015": "^6.18.0"
+  }
+}
