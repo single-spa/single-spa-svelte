@@ -36,7 +36,7 @@ export const unmount = [
 All options are passed to single-spa-svelte via the `opts` parameter when calling `singleSpaSvelte(opts)`. The following options are available:
 
 - `component`: (required) The root component that will be rendered. This
-	component should be compiled by svelte and *not* iife.
+	component should be compiled by svelte and **not** an iife.
 - `domElementGetter`: (required) A function which will return a dom
 	element. The root component will be mounted in this element.
 - `data`: (optional) Data passed to the root component.
