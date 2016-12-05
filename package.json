@@ -1,6 +1,6 @@
 {
   "name": "single-spa-svelte",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "a single-spa plugin for svelte applications",
   "main": "lib/single-spa-svelte.js",
   "scripts": {
