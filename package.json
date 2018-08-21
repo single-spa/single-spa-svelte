@@ -5,7 +5,7 @@
   "main": "lib/single-spa-svelte.js",
   "scripts": {
     "build": "babel src --out-dir lib",
-    "prepublish": "npm build"
+    "prepublish": "npm run build"
   },
   "files": [
     "lib",
