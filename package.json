@@ -4,7 +4,8 @@
   "description": "a single-spa plugin for svelte applications",
   "main": "lib/single-spa-svelte.js",
   "scripts": {
-    "build": "babel src --out-dir lib"
+    "build": "babel src --out-dir lib",
+    "prepublish": "npm build"
   },
   "files": [
     "lib",
