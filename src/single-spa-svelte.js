@@ -49,7 +49,7 @@ function mount(opts, mountedInstances) {
 
 function unmount(opts, mountedInstances) {
 	return new Promise((resolve, reject) => {
-		mountedInstances.instance.teardown();
+		mountedInstances.instance.destroy();
 		resolve();
 	});
 }
