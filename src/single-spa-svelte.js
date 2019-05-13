@@ -37,9 +37,16 @@ function bootstrap(opts) {
 }
 
 function mount(opts, mountedInstances) {
+  let svelteOpts = Object.keys(opts).reduce((object, key) => {
+    if (!Object.keys(defaultOpts).includes(key)) {
+      object[key] = opts[key];
+    }
+    return object;
+  }, {});
+
   return new Promise((resolve, reject) => {
     mountedInstances.instance = new opts.component({
-      ...userOpts,
+      ...svelteOpts,
       target: opts.domElementGetter(),
       data: opts.data || {},
     });
