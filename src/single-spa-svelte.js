@@ -37,8 +37,10 @@ function bootstrap(opts) {
 }
 
 function mount(opts, mountedInstances) {
-  let svelteOpts = Object.keys(opts).reduce((object, key) => {
-    if (!Object.keys(defaultOpts).includes(key)) {
+  const defaultOptKeys = Object.keys(defaultOpts);
+
+  const svelteOpts = Object.keys(opts).reduce((object, key) => {
+    if (!defaultOptKeys.includes(key)) {
       object[key] = opts[key];
     }
     return object;
