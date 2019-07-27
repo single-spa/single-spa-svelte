@@ -4,8 +4,8 @@
   "description": "a single-spa plugin for svelte applications",
   "main": "lib/single-spa-svelte.js",
   "scripts": {
-    "build": "babel src --out-dir lib",
-    "prepublish": "npm run build"
+    "build": "babel src --out-dir lib --source-maps",
+    "prepublishOnly": "npm run build"
   },
   "files": [
     "lib",
@@ -27,9 +27,9 @@
   },
   "homepage": "https://github.com/CanopyTax/single-spa-svelte#readme",
   "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/preset-env": "^7.0.0"
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/preset-env": "^7.5.5"
   }
 }
