@@ -13,7 +13,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CanopyTax/single-spa-svelte.git"
+    "url": "git+https://github.com/single-spa/single-spa-svelte.git"
   },
   "keywords": [
     "single-spa",
@@ -23,9 +23,9 @@
   "author": "Bret Little",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/CanopyTax/single-spa-svelte/issues"
+    "url": "https://github.com/single-spa/single-spa-svelte/issues"
   },
-  "homepage": "https://github.com/CanopyTax/single-spa-svelte#readme",
+  "homepage": "https://github.com/single-spa/single-spa-svelte#readme",
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
