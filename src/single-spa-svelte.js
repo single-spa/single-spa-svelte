@@ -27,7 +27,8 @@ export default function singleSpaSvelte(userOpts) {
   return {
     bootstrap: bootstrap.bind(null, opts, mountedInstances),
     mount: mount.bind(null, opts, mountedInstances),
-    unmount: unmount.bind(null, opts, mountedInstances)
+    unmount: unmount.bind(null, opts, mountedInstances),
+    update: update.bind(null, opts, mountedInstances)
   };
 }
 
@@ -62,6 +63,14 @@ function unmount(opts, mountedInstances) {
     mountedInstances.instance.$destroy
       ? mountedInstances.instance.$destroy()
       : mountedInstances.instance.destroy();
+  });
+}
+
+function update(opts, mountedInstances, props) {
+  return Promise.resolve().then(() => {
+    mountedInstances.instance.$set
+      ? mountedInstances.instance.$set(props)
+      : mountedInstances.instance.set(props);
   });
 }
 
