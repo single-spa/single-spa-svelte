@@ -29,7 +29,7 @@ describe(`single-spa-svelte`, () => {
     await lifecycles.mount(props);
     expect(component).toHaveBeenCalled();
     expect($destroy).not.toHaveBeenCalled();
-    let call = component.mock.calls[0][0];
+    const call = component.mock.calls[0][0];
     expect(call.target).toBeDefined();
     expect(call.props).toEqual({
       thing: "value",
