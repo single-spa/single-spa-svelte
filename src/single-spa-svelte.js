@@ -4,7 +4,7 @@ const defaultOpts = {
 
   // optional opts
   domElementGetter: null,
-  props: {}
+  props: {},
 };
 
 export default function singleSpaSvelte(userOpts) {
@@ -14,7 +14,7 @@ export default function singleSpaSvelte(userOpts) {
 
   const opts = {
     ...defaultOpts,
-    ...userOpts
+    ...userOpts,
   };
 
   if (!opts.component) {
@@ -28,7 +28,7 @@ export default function singleSpaSvelte(userOpts) {
     bootstrap: bootstrap.bind(null, opts, mountedInstances),
     mount: mount.bind(null, opts, mountedInstances),
     unmount: unmount.bind(null, opts, mountedInstances),
-    update: update.bind(null, opts, mountedInstances)
+    update: update.bind(null, opts, mountedInstances),
   };
 }
 
@@ -53,7 +53,7 @@ function mount(opts, mountedInstances, singleSpaProps) {
     mountedInstances.instance = new opts.component({
       ...svelteOpts,
       target: domElement,
-      props: Object.assign({}, singleSpaProps, opts.props)
+      props: Object.assign({}, singleSpaProps, opts.props),
     });
   });
 }

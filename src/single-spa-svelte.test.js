@@ -5,21 +5,21 @@ describe(`single-spa-svelte`, () => {
     const component = jest.fn();
     let props = {
       name: "app1",
-      foo: "bar"
+      foo: "bar",
     };
     const $set = jest.fn(
-      newProps => (props = Object.assign({}, props, newProps))
+      (newProps) => (props = Object.assign({}, props, newProps))
     );
     const $destroy = jest.fn();
-    component.mockImplementationOnce(function() {
+    component.mockImplementationOnce(function () {
       this.$set = $set;
       this.$destroy = $destroy;
     });
     const lifecycles = singleSpaSvelte({
       component,
       props: {
-        thing: "value"
-      }
+        thing: "value",
+      },
     });
     expect(component).not.toHaveBeenCalled();
     expect($destroy).not.toHaveBeenCalled();
@@ -34,7 +34,7 @@ describe(`single-spa-svelte`, () => {
     expect(call.props).toEqual({
       thing: "value",
       foo: "bar",
-      name: "app1"
+      name: "app1",
     });
     expect($destroy).not.toHaveBeenCalled();
     await lifecycles.update({ foo: "notbar" });
