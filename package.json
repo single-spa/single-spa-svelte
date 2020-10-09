@@ -4,10 +4,10 @@
   "description": "a single-spa plugin for svelte applications",
   "main": "lib/single-spa-svelte.js",
   "scripts": {
-    "build": "babel src --out-dir lib --source-maps",
-    "test": "BABEL_ENV=test jest",
+    "build": "rimraf lib && babel src/single-spa-svelte.js --out-file lib/single-spa-svelte.js --source-maps",
+    "test": "cross-env BABEL_ENV=test jest",
     "lint": "eslint src",
-    "prettier": "prettier --write './**'",
+    "format": "prettier --write './**'",
     "prepublishOnly": "npm run build"
   },
   "husky": {
@@ -41,12 +41,14 @@
     "@types/jest": "^26.0.14",
     "babel-eslint": "^11.0.0-beta.2",
     "babel-jest": "^26.5.2",
+    "cross-env": "^7.0.2",
     "eslint": "^7.11.0",
     "eslint-config-important-stuff": "^1.1.0",
     "husky": "^4.3.0",
     "jest": "^26.5.2",
     "jest-cli": "^26.5.2",
     "prettier": "^2.1.2",
-    "pretty-quick": "^3.0.2"
+    "pretty-quick": "^3.0.2",
+    "rimraf": "^3.0.2"
   }
 }
