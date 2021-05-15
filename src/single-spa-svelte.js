@@ -79,9 +79,9 @@ function chooseDomElementGetter(opts, props) {
   if (props.domElement) {
     return () => props.domElement;
   } else if (props.domElementGetter) {
-    return props.domElementGetter;
+    return () => props.domElementGetter(props);
   } else if (opts.domElementGetter) {
-    return opts.domElementGetter;
+    return () => opts.domElementGetter(props);
   } else {
     return defaultDomElementGetter(props);
   }

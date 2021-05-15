@@ -3,9 +3,17 @@ import singleSpaSvelte from "./single-spa-svelte";
 describe(`single-spa-svelte`, () => {
   it("can bootstrap, mount, and unmount a svelte application", async () => {
     const component = jest.fn();
+    const domElementGetter = ({ name }) => {
+      const domElement = document.createElement("div");
+      domElement.id = `single-spa-application:${name}`;
+      domElement.dataset.testId = name;
+
+      return domElement;
+    };
     let props = {
       name: "app1",
       foo: "bar",
+      domElementGetter,
     };
     const $set = jest.fn(
       (newProps) => (props = Object.assign({}, props, newProps))
@@ -30,12 +38,8 @@ describe(`single-spa-svelte`, () => {
     expect(component).toHaveBeenCalled();
     expect($destroy).not.toHaveBeenCalled();
     const call = component.mock.calls[0][0];
-    expect(call.target).toBeDefined();
-    expect(call.props).toEqual({
-      thing: "value",
-      foo: "bar",
-      name: "app1",
-    });
+    expect(call.target.dataset.testId).toEqual(props.name);
+    expect(call.props).toEqual({ ...props, thing: "value" });
     expect($destroy).not.toHaveBeenCalled();
     await lifecycles.update({ foo: "notbar" });
     expect($destroy).not.toHaveBeenCalled();
