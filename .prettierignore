@@ -3,3 +3,4 @@ lib
 LICENSE
 yarn.lock
 .prettierignore
+pnpm-lock.yaml
