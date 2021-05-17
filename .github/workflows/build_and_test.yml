@@ -15,7 +15,7 @@ jobs:
           node-version: "16"
       - uses: pnpm/action-setup@v1.2.1
         with:
-          version: 5.14.1
+          version: 6.2.5
       - run: pnpm install --frozen-lockfile
       - run: pnpm test
       - run: pnpm run lint
