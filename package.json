@@ -9,7 +9,7 @@
     "lint": "eslint src",
     "format": "prettier --write .",
     "check-format": "prettier --check .",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "pnpm run build",
     "prepare": "husky install"
   },
   "files": [
