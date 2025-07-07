@@ -1,3 +1,5 @@
+import { mount as originalMount, unmount as originalUnmount } from "svelte";
+
 const defaultOpts = {
   // required opts
   component: null,
@@ -50,7 +52,7 @@ function mount(opts, mountedInstances, singleSpaProps) {
     const domElementGetter = chooseDomElementGetter(opts, singleSpaProps);
     const domElement = domElementGetter();
     // See https://svelte.dev/docs#Creating_a_component
-    mountedInstances.instance = new opts.component({
+    mountedInstances.instance = originalMount(opts.component, {
       ...svelteOpts,
       target: domElement,
       props: Object.assign({}, singleSpaProps, opts.props),
@@ -59,18 +61,14 @@ function mount(opts, mountedInstances, singleSpaProps) {
 }
 
 function unmount(opts, mountedInstances) {
-  return Promise.resolve().then(() => {
-    mountedInstances.instance.$destroy
-      ? mountedInstances.instance.$destroy()
-      : mountedInstances.instance.destroy();
-  });
+  return originalUnmount(mountedInstances.instance);
 }
 
 function update(opts, mountedInstances, props) {
   return Promise.resolve().then(() => {
-    mountedInstances.instance.$set
-      ? mountedInstances.instance.$set(props)
-      : mountedInstances.instance.set(props);
+    for (const prop in props) {
+      mountedInstances.instance[prop] = props[prop];
+    }
   });
 }
 
@@ -91,7 +89,7 @@ function defaultDomElementGetter(props) {
   const appName = props.appName || props.name;
   if (!appName) {
     throw Error(
-      `single-spa-svelte was not given an application name as a prop, so it can't make a unique dom element container for the svelte application`
+      `single-spa-svelte was not given an application name as a prop, so it can't make a unique dom element container for the svelte application`,
     );
   }
   const htmlId = `single-spa-application:${appName}`;
