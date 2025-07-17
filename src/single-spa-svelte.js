@@ -1,8 +1,8 @@
-import { mount as originalMount, unmount as originalUnmount } from "svelte";
-
 const defaultOpts = {
   // required opts
   component: null,
+  mount: null,
+  unmount: null,
 
   // optional opts
   domElementGetter: null,
@@ -21,6 +21,12 @@ export default function singleSpaSvelte(userOpts) {
 
   if (!opts.component) {
     throw new Error("single-spa-svelte must be passed opts.component");
+  }
+  if (!opts.mount) {
+    throw new Error("single-spa-svelte must be passed opts.mount");
+  }
+  if (!opts.unmount) {
+    throw new Error("single-spa-svelte must be passed opts.unmount");
   }
 
   // Just a shared object to store the mounted object state
@@ -52,7 +58,7 @@ function mount(opts, mountedInstances, singleSpaProps) {
     const domElementGetter = chooseDomElementGetter(opts, singleSpaProps);
     const domElement = domElementGetter();
     // See https://svelte.dev/docs#Creating_a_component
-    mountedInstances.instance = originalMount(opts.component, {
+    mountedInstances.instance = opts.mount(opts.component, {
       ...svelteOpts,
       target: domElement,
       props: Object.assign({}, singleSpaProps, opts.props),
@@ -61,7 +67,7 @@ function mount(opts, mountedInstances, singleSpaProps) {
 }
 
 function unmount(opts, mountedInstances) {
-  return originalUnmount(mountedInstances.instance);
+  return opts.unmount(mountedInstances.instance);
 }
 
 function update(opts, mountedInstances, props) {
