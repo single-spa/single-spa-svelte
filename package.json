@@ -3,6 +3,7 @@
   "version": "2.1.1",
   "description": "a single-spa plugin for svelte applications",
   "main": "lib/single-spa-svelte.js",
+  "packageManager": "pnpm@10.13.1+sha224.c405af218a5ae22c848f557c21c3821030ab4e2386260bcf01dc2ea0",
   "scripts": {
     "build": "rimraf lib && babel src/single-spa-svelte.js --out-file lib/single-spa-svelte.js --source-maps",
     "test": "vitest",
