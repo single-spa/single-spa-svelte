@@ -1,5 +1,4 @@
 import { chooseDomElementGetter } from "dom-element-getter-helpers";
-import type { SvelteComponent, mount, unmount } from "svelte";
 
 const defaultOpts = {
   // required opts
