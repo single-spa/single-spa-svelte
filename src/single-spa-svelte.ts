@@ -1,6 +1,7 @@
 import { chooseDomElementGetter } from "dom-element-getter-helpers";
+import type { SvelteComponent, mount, unmount } from "svelte";
 
-const defaultOpts: Opts = {
+const defaultOpts = {
   // required opts
   component: null,
   mount: null,
@@ -10,8 +11,6 @@ const defaultOpts: Opts = {
   domElementGetter: null,
   props: {},
 };
-
-export interface Opts {}
 
 export default function singleSpaSvelte(userOpts) {
   if (typeof userOpts !== "object") {
