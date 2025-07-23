@@ -1,4 +1,6 @@
-const defaultOpts = {
+import { chooseDomElementGetter } from "dom-element-getter-helpers";
+
+const defaultOpts: Opts = {
   // required opts
   component: null,
   mount: null,
@@ -8,6 +10,8 @@ const defaultOpts = {
   domElementGetter: null,
   props: {},
 };
+
+export interface Opts {}
 
 export default function singleSpaSvelte(userOpts) {
   if (typeof userOpts !== "object") {
@@ -76,38 +80,4 @@ function update(opts, mountedInstances, props) {
       mountedInstances.instance[prop] = props[prop];
     }
   });
-}
-
-function chooseDomElementGetter(opts, props) {
-  props = props && props.customProps ? props.customProps : props;
-  if (props.domElement) {
-    return () => props.domElement;
-  } else if (props.domElementGetter) {
-    return () => props.domElementGetter(props);
-  } else if (opts.domElementGetter) {
-    return () => opts.domElementGetter(props);
-  } else {
-    return defaultDomElementGetter(props);
-  }
-}
-
-function defaultDomElementGetter(props) {
-  const appName = props.appName || props.name;
-  if (!appName) {
-    throw Error(
-      `single-spa-svelte was not given an application name as a prop, so it can't make a unique dom element container for the svelte application`,
-    );
-  }
-  const htmlId = `single-spa-application:${appName}`;
-
-  return function defaultDomEl() {
-    let domElement = document.getElementById(htmlId);
-    if (!domElement) {
-      domElement = document.createElement("div");
-      domElement.id = htmlId;
-      document.body.appendChild(domElement);
-    }
-
-    return domElement;
-  };
 }
