@@ -10,12 +10,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
-          node-version: "16"
-      - uses: pnpm/action-setup@v2.0.1
-        with:
-          version: 6.2.5
+          node-version: "20"
+      - uses: pnpm/action-setup@v4.1.0
       - run: pnpm install --frozen-lockfile
       - run: pnpm test
       - run: pnpm run lint

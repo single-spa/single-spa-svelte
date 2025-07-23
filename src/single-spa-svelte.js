@@ -1,6 +1,8 @@
 const defaultOpts = {
   // required opts
   component: null,
+  mount: null,
+  unmount: null,
 
   // optional opts
   domElementGetter: null,
@@ -19,6 +21,12 @@ export default function singleSpaSvelte(userOpts) {
 
   if (!opts.component) {
     throw new Error("single-spa-svelte must be passed opts.component");
+  }
+  if (!opts.mount) {
+    throw new Error("single-spa-svelte must be passed opts.mount");
+  }
+  if (!opts.unmount) {
+    throw new Error("single-spa-svelte must be passed opts.unmount");
   }
 
   // Just a shared object to store the mounted object state
@@ -50,7 +58,7 @@ function mount(opts, mountedInstances, singleSpaProps) {
     const domElementGetter = chooseDomElementGetter(opts, singleSpaProps);
     const domElement = domElementGetter();
     // See https://svelte.dev/docs#Creating_a_component
-    mountedInstances.instance = new opts.component({
+    mountedInstances.instance = opts.mount(opts.component, {
       ...svelteOpts,
       target: domElement,
       props: Object.assign({}, singleSpaProps, opts.props),
@@ -59,18 +67,14 @@ function mount(opts, mountedInstances, singleSpaProps) {
 }
 
 function unmount(opts, mountedInstances) {
-  return Promise.resolve().then(() => {
-    mountedInstances.instance.$destroy
-      ? mountedInstances.instance.$destroy()
-      : mountedInstances.instance.destroy();
-  });
+  return opts.unmount(mountedInstances.instance);
 }
 
 function update(opts, mountedInstances, props) {
   return Promise.resolve().then(() => {
-    mountedInstances.instance.$set
-      ? mountedInstances.instance.$set(props)
-      : mountedInstances.instance.set(props);
+    for (const prop in props) {
+      mountedInstances.instance[prop] = props[prop];
+    }
   });
 }
 
@@ -91,7 +95,7 @@ function defaultDomElementGetter(props) {
   const appName = props.appName || props.name;
   if (!appName) {
     throw Error(
-      `single-spa-svelte was not given an application name as a prop, so it can't make a unique dom element container for the svelte application`
+      `single-spa-svelte was not given an application name as a prop, so it can't make a unique dom element container for the svelte application`,
     );
   }
   const htmlId = `single-spa-application:${appName}`;
