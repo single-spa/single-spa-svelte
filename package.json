@@ -1,5 +1,5 @@
 {
-  "name": "@single-spa/svelte",
+  "name": "single-spa-svelte",
   "version": "3.0.0-beta.0",
   "description": "a single-spa plugin for svelte applications",
   "type": "module",
